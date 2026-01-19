@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" \"Lamacoid Creator.csproj\" /p:Configuration=Debug /t:Build)",
+      "Bash(\"C:\\\\Program Files\\\\Microsoft Visual Studio\\\\2022\\\\Community\\\\MSBuild\\\\Current\\\\Bin\\\\MSBuild.exe\" \"Lamacoid Creator.sln\" /p:Configuration=Debug /t:Build)",
+      "Bash(csc:*)",
+      "Bash(grep:*)",
+      "Bash(nuget restore:*)"
+    ]
+  }
+}

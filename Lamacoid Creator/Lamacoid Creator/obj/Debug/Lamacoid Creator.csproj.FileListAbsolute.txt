@@ -1,0 +1,18 @@
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\obj\Debug\Lamacoid Creator.csproj.AssemblyReference.cache
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\obj\Debug\Lamacoid_Creator.Form1.resources
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\obj\Debug\Lamacoid_Creator.Properties.Resources.resources
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\obj\Debug\Lamacoid Creator.csproj.GenerateResource.cache
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\obj\Debug\Lamacoid Creator.csproj.CoreCompileInputs.cache
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\Lamacoid Creator.exe.config
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\Lamacoid Creator.exe
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\Lamacoid Creator.pdb
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\BouncyCastle.Cryptography.dll
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\itextsharp.dll
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\PdfiumViewer.dll
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\BouncyCastle.Cryptography.xml
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\itextsharp.xml
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\PdfiumViewer.xml
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\bin\Debug\nl\PdfiumViewer.resources.dll
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\obj\Debug\Lamacoid.BB10DE56.Up2Date
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\obj\Debug\Lamacoid Creator.exe
+C:\Users\dlebel\Downloads\LamCreator-main (1)\LamCreator-main\Lamacoid Creator\Lamacoid Creator\obj\Debug\Lamacoid Creator.pdb
