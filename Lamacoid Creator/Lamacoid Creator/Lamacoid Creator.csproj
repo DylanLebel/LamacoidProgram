@@ -68,6 +68,9 @@
   <ItemGroup>
     <Compile Include="Constants.cs" />
     <Compile Include="DraftSightHelper.cs" />
+    <Compile Include="DraftSightHelperFactory.cs" />
+    <Compile Include="IDraftSightHelper.cs" />
+    <Compile Include="MockDraftSightHelper.cs" />
     <Compile Include="LamacoidIndex.cs" />
     <Compile Include="LamacoidItem.cs" />
     <Compile Include="Logger.cs" />

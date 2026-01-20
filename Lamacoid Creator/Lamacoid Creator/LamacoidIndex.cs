@@ -13,11 +13,20 @@ namespace Lamacoid_Creator
     /// </summary>
     public class LamacoidIndex
     {
+        private readonly IDraftSightHelper draftSightHelper;
         private List<LamacoidItem> allLamacoids = new List<LamacoidItem>();
         private bool isIndexed = false;
 
         public event EventHandler<IndexProgressEventArgs> ProgressChanged;
         public event EventHandler IndexCompleted;
+
+        /// <summary>
+        /// Constructor - initializes DraftSight helper based on configuration
+        /// </summary>
+        public LamacoidIndex()
+        {
+            draftSightHelper = DraftSightHelperFactory.Create();
+        }
 
         /// <summary>
         /// Gets all lamacoids in the index
@@ -159,7 +168,7 @@ namespace Lamacoid_Creator
             try
             {
                 // Try to open the DWG and read properties
-                var doc = DraftSightHelper.OpenTemplate(dwgPath);
+                var doc = draftSightHelper.OpenTemplate(dwgPath);
                 if (doc != null)
                 {
                     try
@@ -178,7 +187,7 @@ namespace Lamacoid_Creator
                     }
                     finally
                     {
-                        DraftSightHelper.CloseDocument(doc, dwgPath);
+                        draftSightHelper.CloseDocument(doc, dwgPath);
                     }
                 }
             }

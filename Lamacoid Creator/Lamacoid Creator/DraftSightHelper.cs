@@ -12,14 +12,14 @@ namespace Lamacoid_Creator
     /// <summary>
     /// Helper class for DraftSight automation operations
     /// </summary>
-    public static class DraftSightHelper
+    public class DraftSightHelper : IDraftSightHelper
     {
-        private static DraftSight.Interop.dsAutomation.Application dsApp;
+        private DraftSight.Interop.dsAutomation.Application dsApp;
 
         /// <summary>
         /// Generates the next available file name based on existing files
         /// </summary>
-        public static string GenerateNextFileName(string folderPath)
+        public string GenerateNextFileName(string folderPath)
         {
             Logger.Debug($"Generating next file name for folder: {folderPath}");
             int currentMax = FindHighestFileNumber(folderPath);
@@ -32,7 +32,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Finds the highest numbered file in the directory
         /// </summary>
-        private static int FindHighestFileNumber(string folderPath)
+        private int FindHighestFileNumber(string folderPath)
         {
             var regex = new Regex($@"{Constants.FileNamePrefix}(\d+){Constants.DwgExtension}");
             int maxNumber = 0;
@@ -58,7 +58,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Initializes connection to DraftSight application
         /// </summary>
-        private static DraftSight.Interop.dsAutomation.Application InitializeDraftSight()
+        private DraftSight.Interop.dsAutomation.Application InitializeDraftSight()
         {
             Logger.Info("Attempting to connect to DraftSight application...");
             try
@@ -82,7 +82,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Opens a template file in DraftSight
         /// </summary>
-        public static Document OpenTemplate(string templateFilePath)
+        public Document OpenTemplate(string templateFilePath)
         {
             Logger.Debug($"OpenTemplate called for: {templateFilePath}");
 
@@ -120,7 +120,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Updates a custom property in a DraftSight document
         /// </summary>
-        public static bool UpdateCustomProperty(
+        public bool UpdateCustomProperty(
             Document dsDoc,
             string propertyName,
             string propertyValue,
@@ -193,7 +193,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Closes a DraftSight document
         /// </summary>
-        public static void CloseDocument(Document dsDoc, string documentFilePath)
+        public void CloseDocument(Document dsDoc, string documentFilePath)
         {
             Logger.Debug($"CloseDocument called for: {Path.GetFileName(documentFilePath)}");
 
@@ -218,7 +218,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Gets a custom property value from drawing properties
         /// </summary>
-        public static string GetPropertyValue(object customProps, string propertyName)
+        public string GetPropertyValue(object customProps, string propertyName)
         {
             try
             {
@@ -240,7 +240,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Exports a DWG file to PDF format
         /// </summary>
-        public static bool ExportToPdf(string dwgFilePath, string pdfFilePath)
+        public bool ExportToPdf(string dwgFilePath, string pdfFilePath)
         {
             Logger.Info($"Starting PDF export: {Path.GetFileName(dwgFilePath)} -> {Path.GetFileName(pdfFilePath)}");
             Stopwatch exportTimer = Stopwatch.StartNew();

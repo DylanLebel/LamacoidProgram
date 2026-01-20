@@ -9,6 +9,11 @@ namespace Lamacoid_Creator
     /// </summary>
     public static class Constants
     {
+        // Test Mode Configuration
+        // Set to true to use mock DraftSight helper (no DraftSight required)
+        // Set to false to use real DraftSight automation
+        public const bool UseTestMode = true;
+
         // Directory paths
         public const string TemplatesPath = @"Y:\Autocad\Template\~LAMACOIDS\Lams\Templates";
         public const string LamacoidDirectory = @"Y:\Autocad\Template\~LAMACOIDS\Lams";

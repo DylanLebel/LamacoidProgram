@@ -10,6 +10,9 @@ namespace Lamacoid_Creator
 {
     public class LamacoidForm : Form
     {
+        // DraftSight Helper
+        private readonly IDraftSightHelper draftSightHelper;
+
         // UI Controls
         private Button addButton;
         private Button continueButton;
@@ -42,6 +45,9 @@ namespace Lamacoid_Creator
                     MessageBoxButtons.OK,
                     MessageBoxIcon.Warning);
             }
+
+            // Initialize DraftSight helper based on test mode
+            draftSightHelper = DraftSightHelperFactory.Create();
 
             InitializeComponents();
             LoadTemplates();
@@ -399,7 +405,7 @@ namespace Lamacoid_Creator
         {
             Stopwatch variationTimer = Stopwatch.StartNew();
             string variantName = $"{baseName}-{variationNumber:D2}";
-            string newFileName = DraftSightHelper.GenerateNextFileName(Constants.LamacoidDirectory) + Constants.DwgExtension;
+            string newFileName = draftSightHelper.GenerateNextFileName(Constants.LamacoidDirectory) + Constants.DwgExtension;
             string newFilePath = Path.Combine(Constants.LamacoidDirectory, newFileName);
 
             Logger.Info($"Processing variation: {variantName}");
@@ -415,7 +421,7 @@ namespace Lamacoid_Creator
 
                 // Open and update document
                 Logger.Debug($"Opening template document: {newFilePath}");
-                DraftSight.Interop.dsAutomation.Document copiedDoc = DraftSightHelper.OpenTemplate(newFilePath);
+                DraftSight.Interop.dsAutomation.Document copiedDoc = draftSightHelper.OpenTemplate(newFilePath);
                 if (copiedDoc == null)
                 {
                     Logger.Error($"Failed to open copied template for {variantName}");
@@ -425,12 +431,12 @@ namespace Lamacoid_Creator
 
                 // Update properties
                 Logger.Debug($"Updating custom properties for {variantName}");
-                DraftSightHelper.UpdateCustomProperty(
+                draftSightHelper.UpdateCustomProperty(
                     copiedDoc,
                     Constants.DescriptionProperty,
                     $"{variantName}{Constants.DescriptionSuffix}");
 
-                DraftSightHelper.UpdateCustomProperty(
+                draftSightHelper.UpdateCustomProperty(
                     copiedDoc,
                     Constants.ContentsProperty,
                     variantName);
@@ -441,7 +447,7 @@ namespace Lamacoid_Creator
                 // Export to PDF
                 string pdfFilePath = newFilePath.Replace(Constants.DwgExtension, Constants.PdfExtension);
                 Logger.Debug($"Exporting to PDF: {pdfFilePath}");
-                bool isPdfCreated = DraftSightHelper.ExportToPdf(newFilePath, pdfFilePath);
+                bool isPdfCreated = draftSightHelper.ExportToPdf(newFilePath, pdfFilePath);
                 pdfCreationStatus.Add(pdfFilePath, isPdfCreated);
 
                 if (!isPdfCreated)
@@ -455,7 +461,7 @@ namespace Lamacoid_Creator
 
                 // Close document
                 Logger.Debug($"Closing document: {newFilePath}");
-                DraftSightHelper.CloseDocument(copiedDoc, newFilePath);
+                draftSightHelper.CloseDocument(copiedDoc, newFilePath);
                 Logger.Info($"Document closed: {newFileName}");
 
                 variationTimer.Stop();
@@ -495,7 +501,7 @@ namespace Lamacoid_Creator
                 string dwgFilePath = entry.Key.Replace(Constants.PdfExtension, Constants.DwgExtension);
                 Logger.Info($"Retrying PDF creation for: {Path.GetFileName(dwgFilePath)}");
 
-                bool retrySuccess = DraftSightHelper.ExportToPdf(dwgFilePath, entry.Key);
+                bool retrySuccess = draftSightHelper.ExportToPdf(dwgFilePath, entry.Key);
                 if (!retrySuccess)
                 {
                     Logger.Error($"Retry failed for PDF: {Path.GetFileName(entry.Key)}");
