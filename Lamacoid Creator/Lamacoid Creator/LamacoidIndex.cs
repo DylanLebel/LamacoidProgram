@@ -167,23 +167,37 @@ namespace Lamacoid_Creator
         {
             try
             {
+                // In test mode, skip property extraction since DraftSight isn't available
+                if (Constants.UseTestMode)
+                {
+                    Logger.Debug($"[TEST MODE] Skipping property extraction for {item.FileName}");
+                    return;
+                }
+
                 // Try to open the DWG and read properties
                 var doc = draftSightHelper.OpenTemplate(dwgPath);
                 if (doc != null)
                 {
                     try
                     {
-                        var props = doc.GetDrawingProperties();
+                        // Cast to DraftSight Document type to access properties
+                        #if !MOCK_MODE
+                        var dsDoc = doc as DraftSight.Interop.dsAutomation.Document;
+                        if (dsDoc != null)
+                        {
+                            var props = dsDoc.GetDrawingProperties();
 
-                        // Read properties directly using GetCustomProperty
-                        item.Description = GetPropertySafe(props, "DESCRIPTION");
-                        item.Contents = GetPropertySafe(props, "CONTENTS");
-                        item.Colour = GetPropertySafe(props, "COLOUR");
-                        item.Adhesive = GetPropertySafe(props, "ADHESIVE");
-                        item.Finish = GetPropertySafe(props, "FINISH");
-                        item.Thickness = GetPropertySafe(props, "THICKNESS");
+                            // Read properties directly using GetCustomProperty
+                            item.Description = GetPropertySafe(props, "DESCRIPTION");
+                            item.Contents = GetPropertySafe(props, "CONTENTS");
+                            item.Colour = GetPropertySafe(props, "COLOUR");
+                            item.Adhesive = GetPropertySafe(props, "ADHESIVE");
+                            item.Finish = GetPropertySafe(props, "FINISH");
+                            item.Thickness = GetPropertySafe(props, "THICKNESS");
 
-                        Logger.Debug($"Extracted properties from {item.FileName}: Contents='{item.Contents}', Colour='{item.Colour}'");
+                            Logger.Debug($"Extracted properties from {item.FileName}: Contents='{item.Contents}', Colour='{item.Colour}'");
+                        }
+                        #endif
                     }
                     finally
                     {

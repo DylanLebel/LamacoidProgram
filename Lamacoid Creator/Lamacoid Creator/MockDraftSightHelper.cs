@@ -1,7 +1,6 @@
 using System;
 using System.IO;
 using System.Text.RegularExpressions;
-using DraftSight.Interop.dsAutomation;
 
 namespace Lamacoid_Creator
 {
@@ -53,7 +52,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Simulates opening a template file (returns null in mock mode)
         /// </summary>
-        public Document OpenTemplate(string templateFilePath)
+        public object OpenTemplate(string templateFilePath)
         {
             Logger.Info($"[MOCK] Simulating opening template: {Path.GetFileName(templateFilePath)}");
 
@@ -72,7 +71,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Simulates updating a custom property in a DraftSight document
         /// </summary>
-        public bool UpdateCustomProperty(Document dsDoc, string propertyName, string propertyValue, string logFilePath = null)
+        public bool UpdateCustomProperty(object dsDoc, string propertyName, string propertyValue, string logFilePath = null)
         {
             Logger.Info($"[MOCK] Simulating property update: {propertyName} = {propertyValue}");
 
@@ -84,7 +83,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Simulates closing a DraftSight document
         /// </summary>
-        public void CloseDocument(Document dsDoc, string documentFilePath)
+        public void CloseDocument(object dsDoc, string documentFilePath)
         {
             Logger.Info($"[MOCK] Simulating closing document: {Path.GetFileName(documentFilePath)}");
             Logger.Info($"[MOCK] Document closed successfully");

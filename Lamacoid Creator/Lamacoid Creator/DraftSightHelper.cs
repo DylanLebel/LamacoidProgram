@@ -82,7 +82,7 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Opens a template file in DraftSight
         /// </summary>
-        public Document OpenTemplate(string templateFilePath)
+        public object OpenTemplate(string templateFilePath)
         {
             Logger.Debug($"OpenTemplate called for: {templateFilePath}");
 
@@ -121,7 +121,7 @@ namespace Lamacoid_Creator
         /// Updates a custom property in a DraftSight document
         /// </summary>
         public bool UpdateCustomProperty(
-            Document dsDoc,
+            object dsDoc,
             string propertyName,
             string propertyValue,
             string logFilePath = null)
@@ -134,6 +134,14 @@ namespace Lamacoid_Creator
                 return false;
             }
 
+            // Cast to DraftSight Document type
+            Document document = dsDoc as Document;
+            if (document == null)
+            {
+                Logger.Error("Document is not a valid DraftSight Document type");
+                return false;
+            }
+
             bool updateSuccessful = false;
             int retryCount = 0;
 
@@ -142,7 +150,7 @@ namespace Lamacoid_Creator
                 try
                 {
                     Logger.Debug($"Attempt {retryCount + 1}/{Constants.MaxPropertyUpdateRetries} to update property '{propertyName}'");
-                    DrawingProperties dsDrawingProperties = dsDoc.GetDrawingProperties();
+                    DrawingProperties dsDrawingProperties = document.GetDrawingProperties();
 
                     if (dsDrawingProperties.HasCustomProperty(propertyName))
                     {
@@ -155,7 +163,7 @@ namespace Lamacoid_Creator
                         dsDrawingProperties.AddCustomProperty(propertyName, propertyValue);
                     }
 
-                    dsDoc.Save();
+                    document.Save();
 
                     // Validate the updated property
                     string updatedValue = dsDrawingProperties.GetCustomProperty(propertyName);
@@ -193,11 +201,14 @@ namespace Lamacoid_Creator
         /// <summary>
         /// Closes a DraftSight document
         /// </summary>
-        public void CloseDocument(Document dsDoc, string documentFilePath)
+        public void CloseDocument(object dsDoc, string documentFilePath)
         {
             Logger.Debug($"CloseDocument called for: {Path.GetFileName(documentFilePath)}");
 
-            if (dsDoc != null && dsApp != null)
+            // Cast to DraftSight Document type
+            Document document = dsDoc as Document;
+
+            if (document != null && dsApp != null)
             {
                 try
                 {

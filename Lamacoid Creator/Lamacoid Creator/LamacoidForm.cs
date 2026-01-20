@@ -421,7 +421,7 @@ namespace Lamacoid_Creator
 
                 // Open and update document
                 Logger.Debug($"Opening template document: {newFilePath}");
-                DraftSight.Interop.dsAutomation.Document copiedDoc = draftSightHelper.OpenTemplate(newFilePath);
+                object copiedDoc = draftSightHelper.OpenTemplate(newFilePath);
                 if (copiedDoc == null)
                 {
                     Logger.Error($"Failed to open copied template for {variantName}");
@@ -441,7 +441,7 @@ namespace Lamacoid_Creator
                     Constants.ContentsProperty,
                     variantName);
 
-                copiedDoc.Save();
+                // Properties are automatically saved by UpdateCustomProperty
                 Logger.Info($"Properties updated and DWG saved: {newFileName}");
 
                 // Export to PDF
